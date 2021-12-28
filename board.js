@@ -4,12 +4,8 @@ $(document).ready(function () {
         input = $("#comment").val();
         yourname = $("#yourname").val();
         tap();
-        $("input").val("");
-        $("textarea").val("");
-    });
-
-    $("#edit").click(function () {
-        edit();
+        $("#yourname").val("");
+        $("#comment").val("");
     });
 });
 
