@@ -1,4 +1,4 @@
-var input, yourname;
+var input, yourname,text,edtname;
 $(document).ready(function () {
     $("#tap").click(function () {
         input = $("#comment").val();
@@ -14,9 +14,9 @@ function tap() {
     floor.attr("id", "message");
     floor.append(
         $("<p class=firstname >").html("姓名: "),
-        $("<p class=conname id=conname>").html(yourname),
+        $("<p id=conname>").html(yourname),
         $("<p class=text >").html("內容: "),
-        $("<p class=context id=context>").html(input),
+        $("<p id=context>").html(input),
         $("<button class='btn btn-outline-danger delete'>").html("刪除").attr("id", "del"),
         $("<button class='btn btn-outline-success edt'>").html("編輯").attr("id", "edit")
     );
@@ -25,24 +25,32 @@ function tap() {
         $(this).parents("#message").remove();
     });
     $("#messages").on("click","#edit",function () {
-        $("#conname").replaceWith("<input type=text class=form-control id=yourname1 value="+yourname+">");
-        $("#del").replaceWith("<button class='btn btn-outline-primary' id=send>更改");
-        $("#edit").replaceWith("<button class='btn btn-outline-danger' id=cancel>取消");
-        $("#context").replaceWith("<textarea class=form-control rows=3 id=content name=text>"+input+"</textarea>");
+        text=$(this).parents("#message").find("#context").text()
+        edtname=$(this).parents("#message").find("#conname").text()
+        yourname=edtname
+        input=text
+        $(this).parents("#message").find("#context").replaceWith("<textarea class=form-control rows=3 id=content name=text>"+text+"</textarea>")
+        $(this).parents("#message").find("#conname").replaceWith("<input type=text class=form-control id=yourname1 value="+edtname+">")
+        $(this).parents("#message").find("#del").replaceWith("<button class='btn btn-outline-primary' id=send>更改")
+        $(this).parents("#message").find("#edit").replaceWith("<button class='btn btn-outline-danger' id=cancel>取消")
+        
     });
     $("#messages").on("click","#send",function () {
-        input = $("#content").val();
-        yourname = $("#yourname1").val();
-        $("#yourname1").replaceWith("<p class=conname id=conname>"+yourname);
-        $("#content").replaceWith("<p class=context id=context>"+input);
-        $("#send").replaceWith("<button class='btn btn-outline-danger' id=del>刪除");
-        $("#cancel").replaceWith("<button class='btn btn-outline-success' id=edit>編輯");
+        edtname = $(this).parents("#message").find("#yourname1").val();
+        text = $(this).parents("#message").find("#content").val();
+        $(this).parents("#message").find("#yourname1").replaceWith("<p class=conname id=conname>"+ edtname)
+        $(this).parents("#message").find("#content").replaceWith("<p class=context id=context>"+text)
+        $(this).parents("#message").find("#cancel").replaceWith("<button class='btn btn-outline-success' id=edit>編輯")
+        $(this).parents("#message").find("#send").replaceWith("<button class='btn btn-outline-danger' id=del>刪除")
+        
     });
     $("#messages").on("click","#cancel",function () {
-        $("#yourname1").replaceWith("<p class=conname id=conname>"+yourname);
-        $("#send").replaceWith("<button class='btn btn-outline-danger' id=del>刪除");
-        $("#cancel").replaceWith("<button class='btn btn-outline-success' id=edit>編輯");
-        $("#content").replaceWith("<p class=context id=context>"+input);
+        
+        $(this).parents("#message").find("#content").replaceWith("<p class=context id=context>"+input)
+        $(this).parents("#message").find("#yourname1").replaceWith("<p class=conname id=conname>"+yourname)
+        $(this).parents("#message").find("#send").replaceWith("<button class='btn btn-outline-danger' id=del>刪除")
+        $(this).parents("#message").find("#cancel").replaceWith("<button class='btn btn-outline-success' id=edit>編輯")
+        
     });
 
 
