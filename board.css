@@ -38,4 +38,9 @@ label {
 .text{
     font-size: 24px;
 }
-
+.conname{
+    font-size: 14cm;
+}
+.context{
+    font-size: 14cm;
+}
