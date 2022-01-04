@@ -14,9 +14,9 @@ function tap() {
     floor.attr("id", "message");
     floor.append(
         $("<p class=firstname >").html("姓名: "),
-        $("<p id=conname>").html(yourname),
+        $("<p class=conname id=conname>").html(yourname),
         $("<p class=text >").html("內容: "),
-        $("<p id=context>").html(input),
+        $("<p class=context id=context>").html(input),
         $("<button class='btn btn-outline-danger delete'>").html("刪除").attr("id", "del"),
         $("<button class='btn btn-outline-success edt'>").html("編輯").attr("id", "edit")
     );
